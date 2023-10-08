@@ -6,6 +6,7 @@ CITY_DATA = {'chicago': 'chicago.csv',
              'new york': 'new_york_city.csv',
              'washington': 'washington.csv'}
 months = ['january', 'february', 'march', 'april', 'may', 'june']
+days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
 
 def get_input(prompt):
     return input(prompt).strip().lower()
@@ -53,7 +54,7 @@ def get_filters():
         print('We will make sure to filter by day!')
         day_prompt = 'Which day? Please type a day Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.'
         day = get_input(day_prompt)
-        while day != 'monday' and day != 'tuesday' and day != 'wednesday' and day != 'thursday' and day != 'friday' and day != 'saturday' and day != 'sunday':
+        while day not in days:
             print('Please enter a valid day.')
             day = get_input(day_prompt)
         print('Just one moment... loading the data')
@@ -92,7 +93,7 @@ def load_data(city, month, day):
         df = df[df['month'] == month]
 
     # filter by day of week if applicable
-    if day == 'all' or day == 'Monday' or day == 'Tuesday' or day == 'Wednesday' or day == 'Thursday' or day == 'Friday' or day == 'Saturday' or day == 'Sunday':
+    if day == 'all' or day in days:
         # filter by day of week to create the new dataframe
         df = df[df['day_of_week'] == day.title()]
 
