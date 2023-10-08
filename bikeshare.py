@@ -8,6 +8,12 @@ CITY_DATA = {'chicago': 'chicago.csv',
 
 
 def get_input(prompt):
+    """
+        Get user input.
+
+        Returns:
+            (str) - user's input as a string after trimming whitespace and converting to lowercase
+    """
     return input(prompt).strip().lower()
 
 
