@@ -5,7 +5,7 @@ import numpy as np
 CITY_DATA = {'chicago': 'chicago.csv',
              'new york': 'new_york_city.csv',
              'washington': 'washington.csv'}
-
+months = ['january', 'february', 'march', 'april', 'may', 'june']
 
 def get_input(prompt):
     return input(prompt).strip().lower()
@@ -43,7 +43,7 @@ def get_filters():
         print('We will make sure to filter by month!')
         month_prompt = 'Which month? January, February, March, April, May, or June? Please type out the full month name.'
         month = get_input(month_prompt)
-        while month != 'january' and month != 'february' and month != 'march' and month != 'april' and month != 'may' and month != 'june':
+        while month not in months:
             print('Please enter a valid month.')
             month = get_input(month_prompt)
         print('Just one moment... loading the data')
@@ -84,9 +84,8 @@ def load_data(city, month, day):
     df['day_of_week'] = df['Start Time'].dt.day_name()
 
     # filter by month if applicable
-    if month == 'all' or month == 'January' or month == 'February' or month == 'March' or month == 'April' or month == 'May' or month == 'June':
+    if month == 'all' or month in months:
         # use the index of the months list to get the corresponding int
-        months = ['January', 'February', 'March', 'April', 'May', 'June']
         month = months.index(month) + 1
 
         # filter by month to create the new dataframe
